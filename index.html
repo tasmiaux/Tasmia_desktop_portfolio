@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tasmia's Desktop</title>
+  <meta name="description" content="">
+  <link rel="icon" href="data:,">
+  <link rel="preload" href="fonts/instrument-serif-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/wallpaper.jpg" as="image">
+  <link rel="preload" href="assets/wallpaper-desktop.jpg" as="image">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Shared wallpaper, behind both screens -->
+  <div class="wall" aria-hidden="true">
+    <div class="wall__scene">
+      <img class="wall__img" src="assets/wallpaper.jpg" alt="" data-attr="alt:intro.wallpaperAlt">
+      <!-- Glitchy CRT glass laid over the monitor in the wallpaper -->
+      <div class="crt" id="crt">
+        <div class="crt__dim"></div>
+        <div class="crt__slice crt__slice--a"></div>
+        <div class="crt__slice crt__slice--b"></div>
+        <canvas class="crt__noise" width="96" height="72"></canvas>
+        <div class="crt__scan"></div>
+        <div class="crt__roll"></div>
+        <div class="crt__power"></div>
+      </div>
+    </div>
+    <svg width="0" height="0" style="position:absolute">
+      <clipPath id="crt-glass" clipPathUnits="objectBoundingBox">
+        <path d="M0.0532,0.0038 L0.0955,0.0005 L0.1378,0.0002 L0.1801,0.0000 L0.2225,0.0028 L0.2649,0.0056 L0.3074,0.0084 L0.3500,0.0111 L0.3925,0.0170 L0.4352,0.0229 L0.4779,0.0288 L0.5207,0.0348 L0.5635,0.0409 L0.6064,0.0471 L0.6491,0.0564 L0.6919,0.0659 L0.7345,0.0753 L0.7771,0.0879 L0.8197,0.1005 L0.8621,0.1130 L0.9045,0.1317 L0.9363,0.1564 L0.9523,0.1780 L0.9629,0.2056 L0.9683,0.2486 L0.9738,0.2978 L0.9765,0.3470 L0.9792,0.3962 L0.9844,0.4454 L0.9897,0.4946 L0.9948,0.5438 L1.0000,0.5929 L0.9997,0.6910 L0.9993,0.7890 L0.9990,0.8746 L0.9962,0.9296 L0.9881,0.9663 L0.9722,0.9908 L0.9510,1.0000 L0.9034,0.9850 L0.8451,0.9670 L0.7655,0.9674 L0.6592,0.9678 L0.5527,0.9680 L0.4462,0.9618 L0.3398,0.9554 L0.2654,0.9489 L0.1805,0.9424 L0.0958,0.9297 L0.0587,0.9112 L0.0375,0.8867 L0.0268,0.8500 L0.0212,0.7521 L0.0155,0.6295 L0.0153,0.5068 L0.0100,0.3840 L0.0100,0.3103 L0.0050,0.1999 L0.0000,0.1080 L0.0028,0.0529 L0.0108,0.0254 L0.0267,0.0100 Z"/>
+      </clipPath>
+    </svg>
+  </div>
+
+  <!-- A. Intro -->
+  <section class="intro" id="intro" aria-labelledby="intro-title">
+    <div class="intro__content">
+      <h1 class="intro__title serif" id="intro-title" data-text="intro.headline"></h1>
+      <p class="intro__tagline" data-text="intro.tagline"></p>
+      <p class="intro__byline" data-text="intro.byline"></p>
+      <div class="intro__actions">
+        <button class="btn btn--primary" id="turn-on" type="button" data-text="intro.cta"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- B. Desktop -->
+  <div class="desktop" id="desktop" hidden>
+    <header class="menubar glass">
+      <span class="menubar__brand" data-text="desktop.brand"></span>
+      <!-- Time, place and date, side by side -->
+      <p class="menubar__right" id="menubar-info">
+        <span class="menubar__time" id="clock-time"></span>
+        <span class="menubar__place" data-text="clock.place"></span>
+        <span class="menubar__date" id="clock-date"></span>
+      </p>
+    </header>
+
+    <!-- Shown once the About window closes or the tour ends -->
+    <nav class="desk-icons desk-extra" id="desk-icons" data-attr="aria-label:desktopIcons.label"></nav>
+    <section class="greeting desk-extra" aria-labelledby="greeting-title">
+      <h2 class="greeting__title" id="greeting-title">
+        <span class="greeting__welcome" data-text="desktop.greeting.welcome"></span>
+        <span class="greeting__line greeting__line--a serif" data-text="desktop.greeting.title.0"></span>
+        <span class="greeting__line greeting__line--b serif" data-text="desktop.greeting.title.1"></span>
+      </h2>
+    </section>
+
+    <!-- Windows open here (draggable on desktop and tablet) -->
+    <main class="windows" id="windows"></main>
+
+    <nav class="dock glass" id="dock" data-attr="aria-label:desktop.dockLabel"></nav>
+  </div>
+
+  <div class="boot" aria-hidden="true"></div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

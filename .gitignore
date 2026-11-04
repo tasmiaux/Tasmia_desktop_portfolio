@@ -1,0 +1,10 @@
+# Local tool settings, not part of the site
+.claude/
+
+# The earlier search-history version, kept locally for reference only
+archive/
+
+# OS clutter
+.DS_Store
+Thumbs.db
+desktop.ini

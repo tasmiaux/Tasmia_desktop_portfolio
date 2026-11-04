@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- A plain white text page: folded top-right corner, thin grey rules -->
+  <path d="M9.5 2.5h20.5l8.5 8.5v34.5h-29z" fill="#ffffff" stroke="#9a9a9a" stroke-width="1"/>
+  <path d="M30 2.5v8.5h8.5" fill="#ececec" stroke="#9a9a9a" stroke-width="1" stroke-linejoin="round"/>
+  <g stroke="#b9b9b9" stroke-width="0.9">
+    <path d="M13 9.5h14M13 12.5h14"/>
+    <path d="M13 15.5h22M13 18.5h22M13 21.5h22M13 24.5h22M13 27.5h22M13 30.5h22M13 33.5h22M13 36.5h22M13 39.5h22M13 42.5h22"/>
+  </g>
+</svg>

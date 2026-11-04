@@ -1,0 +1,8 @@
+Official app icons, fetched 2026-11-01 from each brand's own website:
+figma.svg       https://static.figma.com/app/icon/2/favicon.svg   (linked from figma.com)
+claude.svg      https://claude.com/icon.svg                       (linked from claude.com)
+chatgpt.svg     https://chatgpt.com/cdn/assets/favicon.6a33781f61.svg (linked from chatgpt.com)
+wispr-flow.png  https://cdn.prod.website-files.com/.../68d27d1a8a10f417b5644527_flow-wc-v2.png
+                (apple-touch-icon linked from wisprflow.ai), 256x256
+notion.png      https://www.notion.com/front-static/logo-ios.png   (apple-touch-icon linked from notion.com), 512x512
+These are the brands' trademarks, used only to label the tools in the dock.
