@@ -1485,8 +1485,20 @@
   function tabFooter(w, id) {
     var n = TOUR.steps.indexOf(id);
     if (n === -1) return;
+    // Previous on the left; Close tab and Next on the right
     var foot = el("div", "win__tour");
-    foot.appendChild(el("span", "win__tour-step", TOUR.progress.replace("{n}", n + 1).replace("{total}", TOUR.steps.length)));
+    var left = el("div", "win__tour-side");
+    if (n > 0) {
+      var prev = el("button", "btn btn--ghost win__tour-prev", TOUR.previous);
+      prev.type = "button";
+      prev.addEventListener("click", function () {
+        closeWindow(id);
+        openTab(TOUR.steps[n - 1]);
+      });
+      left.appendChild(prev);
+    }
+    foot.appendChild(left);
+    var right = el("div", "win__tour-side win__tour-side--end");
     var end = el("button", "win__tour-end", TOUR.end);
     end.type = "button";
     end.addEventListener("click", function () { closeWindow(id); });
@@ -1499,8 +1511,9 @@
       // Finish ends on Say Hi!, so the last stop is a way to get in touch
       if (WINDOWS.sayhi) openWindow("sayhi");
     });
-    foot.appendChild(end);
-    foot.appendChild(next);
+    right.appendChild(end);
+    right.appendChild(next);
+    foot.appendChild(right);
     w.appendChild(foot);
   }
   /* ---- Desktop icons ---- */

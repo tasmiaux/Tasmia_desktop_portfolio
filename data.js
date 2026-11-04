@@ -468,8 +468,8 @@ window.SITE = {
      Opens these windows one at a time, each with a Next button.        */
   tour: {
     steps: ["figma", "claude", "wispr", "chatgpt", "notion"],
-    progress: "Tab · {n} of {total}",
     next: "Next →",
+    previous: "← Previous",
     finish: "Finish",
     end: "Close tab"
   },

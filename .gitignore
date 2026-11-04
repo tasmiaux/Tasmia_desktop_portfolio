@@ -4,6 +4,20 @@
 # The earlier search-history version, kept locally for reference only
 archive/
 
+# Secrets and local config, if any are ever added
+.env
+.env.*
+*.local
+*.pem
+*.key
+
+# Vercel's local project link (created if you ever use the Vercel CLI)
+.vercel/
+
+# Tooling and logs
+node_modules/
+*.log
+
 # OS clutter
 .DS_Store
 Thumbs.db
