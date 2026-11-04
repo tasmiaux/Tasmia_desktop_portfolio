@@ -1144,7 +1144,8 @@
     else focusWindow(id);
   }
 
-  function openWindow(id, from) {
+  // instant: appear at once, with no grow or genie (and close the same way)
+  function openWindow(id, from, instant) {
     var data = WINDOWS[id];
     if (!data) return null;
     if (aboutTimer) { clearTimeout(aboutTimer); aboutTimer = null; } // they opened something first
@@ -1189,8 +1190,13 @@
     w.addEventListener("focusin", function () { focusWindow(id); });
 
     focusWindow(id);
-    w.origin = from || $(".dock__item--" + id); // where it comes from, and goes back to
-    if (!genie(w, w.origin, false)) {
+    w.origin = instant ? null : from || $(".dock__item--" + id); // where it comes from, and goes back to
+    if (instant) {
+      w.style.transition = "none";
+      w.classList.add("is-open");
+      void w.offsetWidth;
+      w.style.transition = "";
+    } else if (!genie(w, w.origin, false)) {
       void w.offsetWidth; // start state paints before the open animation
       w.classList.add("is-open");
     }
@@ -1514,7 +1520,6 @@
     pdf: '<path d="M6 3h8.5L19 7.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="#fffaf2" stroke="#8f92a4" stroke-width="1.2"/><path d="M14.5 3v4.5H19" fill="none" stroke="#8f92a4" stroke-width="1.2"/><rect x="5.5" y="12.5" width="10" height="5" rx="1.2" fill="#e8705a"/><text x="10.5" y="16.3" font-size="3.6" font-family="Inter, sans-serif" font-weight="700" text-anchor="middle" fill="#fff">PDF</text>',
     txt: '<path d="M6 3h8.5L19 7.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="#fffdf6" stroke="#8f92a4" stroke-width="1.2"/><path d="M14.5 3v4.5H19" fill="none" stroke="#8f92a4" stroke-width="1.2"/><path d="M7.5 11h8M7.5 14h8M7.5 17h5" stroke="#9aa0b8" stroke-width="1.2" stroke-linecap="round"/>'
   };
-  var noHover = window.matchMedia("(hover: none)");
   var iconBar = $("#desk-icons");
 
   SITE.desktopIcons.items.forEach(function (item) {
@@ -1536,18 +1541,12 @@
     }
     btn.appendChild(el("span", "desk-icon__label", item.label));
 
-    var openIt = function () {
-      if (item.link) window.open(item.link, "_blank", "noopener");
-      else openWindow(item.window, btn);
-    };
-    // Double-click on desktop; a single tap on touch screens or Enter/Space
+    // One click (or tap, or Enter/Space) opens it straight away
     btn.dataset.id = item.id;
-    btn.addEventListener("click", function (e) {
-      if (e.detail === 0 || e.pointerType === "touch" || e.pointerType === "pen" || noHover.matches) { openIt(); return; }
-      $$(".desk-icon.is-selected").forEach(function (b) { b.classList.remove("is-selected"); });
-      btn.classList.add("is-selected");
+    btn.addEventListener("click", function () {
+      if (item.link) window.open(item.link, "_blank", "noopener");
+      else openWindow(item.window, btn, true);
     });
-    btn.addEventListener("dblclick", openIt);
 
     // A file in this site only shows if it's really there (links elsewhere always show)
     if (item.link && !/^https?:/.test(item.link)) {
