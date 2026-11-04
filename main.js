@@ -1466,7 +1466,7 @@
   });
 
   /* ---------- Open tabs: Figma, Claude, Wispr, ChatGPT, Notion ----------
-     Each of these windows has a footer (Tab · n of 5, Close tab, Next), however
+     Each of these windows has a footer (Previous, Next or Finish), however
      it was opened. "View Open Tabs" in About starts at the first one. */
   var TOUR = SITE.tour;
   TOUR.steps = TOUR.steps.filter(function (id) { return WINDOWS[id]; });
@@ -1485,7 +1485,7 @@
   function tabFooter(w, id) {
     var n = TOUR.steps.indexOf(id);
     if (n === -1) return;
-    // Previous on the left; Close tab and Next on the right
+    // Previous on the left, Next on the right (the title bar's × closes it)
     var foot = el("div", "win__tour");
     var left = el("div", "win__tour-side");
     if (n > 0) {
@@ -1499,9 +1499,6 @@
     }
     foot.appendChild(left);
     var right = el("div", "win__tour-side win__tour-side--end");
-    var end = el("button", "win__tour-end", TOUR.end);
-    end.type = "button";
-    end.addEventListener("click", function () { closeWindow(id); });
     var last = n === TOUR.steps.length - 1;
     var next = el("button", "btn btn--primary win__tour-next", last ? TOUR.finish : TOUR.next);
     next.type = "button";
@@ -1511,7 +1508,6 @@
       // Finish ends on Say Hi!, so the last stop is a way to get in touch
       if (WINDOWS.sayhi) openWindow("sayhi");
     });
-    right.appendChild(end);
     right.appendChild(next);
     foot.appendChild(right);
     w.appendChild(foot);

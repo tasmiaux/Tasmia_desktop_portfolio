@@ -470,8 +470,7 @@ window.SITE = {
     steps: ["figma", "claude", "wispr", "chatgpt", "notion"],
     next: "Next →",
     previous: "← Previous",
-    finish: "Finish",
-    end: "Close tab"
+    finish: "Finish"
   },
 
   /* ---- Cases: copied from the case-file project's data.js -------

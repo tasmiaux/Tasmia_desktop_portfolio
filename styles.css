@@ -611,7 +611,7 @@ body.is-covered .boot { opacity: 1; transition: none; }
 .about__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 
 /* Tour footer inside a window */
-.win__tour { /* Previous | Close tab, Next */
+.win__tour { /* Previous | Next */
   flex: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -623,17 +623,6 @@ body.is-covered .boot { opacity: 1; transition: none; }
 .win__tour-side { display: flex; align-items: center; gap: 10px; }
 .win__tour-side--end { justify-content: flex-end; }
 .win__tour-prev { min-height: var(--tap); padding: 0 18px; font-size: 0.92rem; }
-.win__tour-end {
-  min-height: var(--tap);
-  padding: 0 10px;
-  border: 0;
-  background: none;
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-}
 .win__tour-next { min-height: var(--tap); padding: 0 20px; font-size: 0.92rem; }
 
 /* ---------- Desktop extras: icons and greeting ----------
