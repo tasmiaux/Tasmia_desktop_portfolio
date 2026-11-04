@@ -1526,8 +1526,17 @@
     if (!item.label || (!item.window && !item.link)) return;
     if (item.window && !WINDOWS[item.window]) return;
 
-    var btn = el("button", "desk-icon");
-    btn.type = "button";
+    // A file link is a real link (popup blockers never stop those); the rest are buttons
+    var btn;
+    if (item.link) {
+      btn = el("a", "desk-icon");
+      btn.href = item.link;
+      btn.target = "_blank";
+      btn.rel = "noopener";
+    } else {
+      btn = el("button", "desk-icon");
+      btn.type = "button";
+    }
     var glyph = '<svg viewBox="0 0 24 24" width="40" height="40" aria-hidden="true">' + (DESK_ICONS[item.kind] || DESK_ICONS.folder) + '</svg>';
     if (item.image) {
       var pic = el("img", "desk-icon__img");
@@ -1541,12 +1550,9 @@
     }
     btn.appendChild(el("span", "desk-icon__label", item.label));
 
-    // One click (or tap, or Enter/Space) opens it straight away
+    // One click (or tap, or Enter) opens it straight away
     btn.dataset.id = item.id;
-    btn.addEventListener("click", function () {
-      if (item.link) window.open(item.link, "_blank", "noopener");
-      else openWindow(item.window, btn, true);
-    });
+    if (!item.link) btn.addEventListener("click", function () { openWindow(item.window, btn, true); });
 
     // A file in this site only shows if it's really there (links elsewhere always show)
     if (item.link && !/^https?:/.test(item.link)) {

@@ -660,6 +660,7 @@ body.is-covered .boot { opacity: 1; transition: none; }
 .desk-icon svg,
 .desk-icon__img { filter: drop-shadow(0 3px 6px rgba(60, 70, 110, 0.25)); }
 .desk-icon__img { display: block; width: 48px; height: 48px; object-fit: contain; }
+a.desk-icon { text-decoration: none; font: inherit; } /* the Resume link looks like the other icons */
 .desk-icon:hover { background: rgba(255, 252, 246, 0.28); }
 .desk-icon.is-selected {
   background: rgba(255, 252, 246, 0.5);
