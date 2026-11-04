@@ -867,13 +867,9 @@
     var list = el("ul", "npage__list");
     (w.lines || []).filter(Boolean).forEach(function (line) { list.appendChild(el("li", null, line)); });
     body.appendChild(list);
-    if (w.outro) body.appendChild(el("p", "npage__outro", w.outro));
-    if (w.sayHi && WINDOWS.sayhi) {
-      var hi = el("button", "btn btn--ghost npage__hi", w.sayHi);
-      hi.type = "button";
-      hi.addEventListener("click", function () { openWindow("sayhi", hi); });
-      body.appendChild(hi);
-    }
+    [].concat(w.outro || []).filter(Boolean).forEach(function (para) {
+      body.appendChild(el("p", "npage__outro", para));
+    });
   };
 
   /* ---- Figma: boards as tabs, each a pan/zoom canvas plus the template ---- */
@@ -1485,10 +1481,12 @@
   function tabFooter(w, id) {
     var n = TOUR.steps.indexOf(id);
     if (n === -1) return;
-    // Previous on the left, Next on the right (the title bar's × closes it)
+    // Previous on the left, Next on the right (the title bar's × closes it).
+    // The last tab has just one button: Get in touch, which opens Say Hi!
+    var last = n === TOUR.steps.length - 1;
     var foot = el("div", "win__tour");
     var left = el("div", "win__tour-side");
-    if (n > 0) {
+    if (n > 0 && !last) {
       var prev = el("button", "btn btn--ghost win__tour-prev", TOUR.previous);
       prev.type = "button";
       prev.addEventListener("click", function () {
@@ -1499,13 +1497,11 @@
     }
     foot.appendChild(left);
     var right = el("div", "win__tour-side win__tour-side--end");
-    var last = n === TOUR.steps.length - 1;
     var next = el("button", "btn btn--primary win__tour-next", last ? TOUR.finish : TOUR.next);
     next.type = "button";
     next.addEventListener("click", function () {
       closeWindow(id);
       if (!last) { openTab(TOUR.steps[n + 1]); return; }
-      // Finish ends on Say Hi!, so the last stop is a way to get in touch
       if (WINDOWS.sayhi) openWindow("sayhi");
     });
     right.appendChild(next);

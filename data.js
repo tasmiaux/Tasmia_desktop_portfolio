@@ -111,8 +111,11 @@ window.SITE = {
         "10 months down. What even happened? 😐😭",
         "Places to go, beaches to see. 🏖️✈️"
       ],
-      outro: "anyways,",      // a line after the points
-      sayHi: "Say Hi! ↗"       // then a button that opens the "sayhi" window
+      // After the points, one paragraph each
+      outro: [
+        "Anyway, I'm open to opportunities.",
+        "Got a role, an idea, or something interesting brewing? I'd love to hear about it."
+      ]
     }
   },
 
@@ -470,7 +473,7 @@ window.SITE = {
     steps: ["figma", "claude", "wispr", "chatgpt", "notion"],
     next: "Next →",
     previous: "← Previous",
-    finish: "Finish"
+    finish: "Get in touch ↗"  // the last tab's only button; opens Say Hi!
   },
 
   /* ---- Cases: copied from the case-file project's data.js -------

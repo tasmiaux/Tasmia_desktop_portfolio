@@ -1105,12 +1105,8 @@ ol.psec__list li + li { margin-top: 6px; }
 .npage__list { margin: 0; padding-left: 1.2em; }
 .npage__list li { margin: 0 0 8px; font-size: 0.98rem; line-height: 1.55; }
 .npage__list li::marker { color: var(--peach-hover); }
-.npage__outro { margin: 14px 0 0; font-size: 0.98rem; color: var(--ink); }
-.npage__hi { /* a light peach outline, to draw the eye a little */
-  margin-top: 14px;
-  box-shadow: inset 0 0 0 1.5px rgba(246, 164, 127, 0.75);
-}
-.npage__hi:hover { box-shadow: inset 0 0 0 1.5px var(--peach); }
+.npage__outro { margin: 14px 0 0; font-size: 0.98rem; line-height: 1.55; color: var(--ink); }
+.npage__outro + .npage__outro { margin-top: 6px; color: var(--ink-soft); }
 
 /* Folder lists: one line per item, with its flag */
 .flist { list-style: none; margin: 12px 0 0; padding: 0; }
